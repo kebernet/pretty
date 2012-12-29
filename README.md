@@ -117,33 +117,33 @@ This is a configuration with one destination server, a simple host match, and a 
 <paths> contain multiple <path> elements that contains a <destination> and a <source>. The destination is a prefix on the path that will be requested to the back side server, while the <source> is a RegEx indicating whether the request matches the path. You can do some basic re-write functionality here by using the first RegEx group expression in the match. For instance, <destination>/bar/<destination> <source>/foo/(.*)</source> will cause requests to /foo/whatever to be mapped to /bar/whatever on the destination server. You can also use this as a simple access control mechanism. For example, having a <source>/allowed/.*</source> in stead of a wildcard first, followed by <source>/.*</source><destination>/forbidden</destination> will prevent the end user from requesting forbidden paths from the front end proxy.
 Now that we have covered the basics, let's look at some more complex cases. A host match of *. matches any host, but say you want to map "beta.mysite.com" to a different endpoint, allowing you to test a new version without deploying it across all of the production application server. You might update the configuration to:
 
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<configuration>
-    <children>
-        <configuration>
-            <host-pattern>beta\..*</host-pattern>
-            <destinations>
-                <destination>
-                    <host>appserver-b</host>
-                    <port>8080</port>
-                </destination>
-            </destinations>
-        </configuration>
-    </children>
-    <destinations>
-        <destination>
-            <host>appserver-a</host>
-            <port>8080</port>
-        </destination>
-    </destinations>
-    <host-pattern>.*</host-pattern>
-    <paths>
-        <path>
-            <destination>/</destination>
-            <source>/.*</source>
-        </path>
-    </paths>
-</configuration>
+    <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    <configuration>
+        <children>
+            <configuration>
+                <host-pattern>beta\..*</host-pattern>
+                <destinations>
+                    <destination>
+                        <host>appserver-b</host>
+                        <port>8080</port>
+                    </destination>
+                </destinations>
+            </configuration>
+        </children>
+        <destinations>
+            <destination>
+                <host>appserver-a</host>
+                <port>8080</port>
+            </destination>
+        </destinations>
+        <host-pattern>.*</host-pattern>
+        <paths>
+            <path>
+                <destination>/</destination>
+                <source>/.*</source>
+            </path>
+        </paths>
+    </configuration>
 
 In this case, we have added a new configuration under the <children> section that matches only "beta." host names -- note the escaping of the "dot" character; this is a regular expression, not a free text pattern -- and directs those sessions to "appserver-b" rather than the default of "appserver-a". If you were doing a migration, you might have replaced a configuration that had two destinations in the default configuration with this one. You would then wait for the "NO MORE ACTIVE SESSIONS ON OLD CONFIGURATIONS" message, and know you could safely redeploy to appserver-b and only affect the beta.mysite.com URLs. If instead, you wanted to keep beta.mysite.com running the entire time, you might change from a configuration with two appservers, to one with one appserver, then publish this configuration, with would then transition current beta.mysite.com sessions to the new application server.
 
@@ -156,6 +156,44 @@ Groovy Command Shell
 
 If you have enabled the Groovy Command Shell, you can connect to it with telnet by typing "telnet localhost 6363", or whatever port number you have configured for it. Remember, you can *only* connect from the local machine. Pretty will not bind the socket listener to any external interface, ever. Below you see an example of this.
 
+    $ telnet localhost 6363
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
+    Groovy Shell (1.8.6, JVM: 1.7.0_09)
+    Type 'help' or '\h' for help.
+    -------------------------------------------------------------------------------------------------------------------------------
+    groovy:000> help
+
+
+    For information about Groovy, visit:
+        http://groovy.codehaus.org
+
+    Available commands:
+      help      (\h ) Display this help message
+      ?         (\? ) Alias to: help
+      exit      (\x ) Exit the shell
+      quit      (\q ) Alias to: exit
+      import    (\i ) Import a class into the namespace
+      display   (\d ) Display the current buffer
+      clear     (\c ) Clear the buffer and reset the prompt counter.
+      show      (\S ) Show variables, classes or imports
+      inspect   (\n ) Inspect a variable or the last result with the GUI object browser
+      purge     (\p ) Purge variables, classes, imports or preferences
+      edit      (\e ) Edit the current buffer
+      load      (\l ) Load a file or URL into the buffer
+      .         (\. ) Alias to: load
+      save      (\s ) Save the current buffer to a file
+      record    (\r ) Record the current session to a file
+      history   (\H ) Display, manage and recall edit-line history
+      alias     (\a ) Create an alias
+      set       (\= ) Set (or list) preferences
+      register  (\rc) Registers a new command with the shell
+
+    For help on a specific command type:
+        help command
+
+    groovy:000>
 
 
 Here you see a set of default commands. You can also, as seen above, call Configurator.load to re-load the configuration from disk. Other standard things you can do from the command shell:
