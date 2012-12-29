@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration>
+    <children/>
+    <destinations>
+        <destination>
+            <host>localhost</host>
+            <port>8080</port>
+        </destination>
+    </destinations>
+    <host-pattern>.*</host-pattern>
+    <paths>
+        <path>
+            <destination>/</destination>
+            <source>/.*</source>
+        </path>
+    </paths>
+</configuration>

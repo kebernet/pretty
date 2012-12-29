@@ -1,0 +1,12 @@
+service pretty-ssl
+{
+ type = UNLISTED
+ disable = yes
+ socket_type = stream
+ protocol = tcp
+ user = root
+ wait = no
+ port = 443
+ redirect = 127.0.0.1 9443
+ log_type = FILE /var/log/pretty/redirector-ssl.log
+}

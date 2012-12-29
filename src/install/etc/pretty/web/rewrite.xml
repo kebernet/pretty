@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE urlrewrite
+    PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+    "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+
+<urlrewrite>
+    <!-- for information on this file, see:
+    http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/index.html
+    -->
+    <rule>
+       <name>Ensure HTTPS</name>
+       <condition type="scheme" operator="notequal">https</condition>
+       <from>^(.*)$</from>
+       <to type="redirect">https://%{server-name}$1</to>
+    </rule>
+   
+</urlrewrite>

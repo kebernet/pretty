@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration>
+    <children>
+        <!-- this host overrides hosts that start with "otherhost." to go to
+        "otherproxyhost". The path mappings will be the same as the parent.-->
+        <configuration>
+            <host-pattern>otherhost\..*</host-pattern>
+            <destinations>
+                <destination>
+                    <host>otherproxyhost</host>
+                    <port>1025</port>
+                </destination>
+            </destinations>
+        </configuration>
+    </children>  
+    <destinations>
+        <destination>
+            <host>localhost</host>
+            <port>8080</port>
+        </destination>
+    </destinations>
+    <host-pattern>.*</host-pattern>
+    <paths>
+        <path>
+            <destination>/</destination>
+            <source>/.*</source>
+        </path>
+    </paths>
+</configuration>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration>
+    <children/>
+    <destinations>
+        <destination>
+            <host>host-a</host>
+            <port>8080</port>
+        </destination>
+        <destination>
+            <host>host-b</host>
+            <port>8080</port>
+        </destination>
+        <destination>
+            <host>host-c</host>
+            <port>8080</port>
+        </destination>
+    </destinations>
+    <host-pattern>.*</host-pattern>
+    <paths>
+        <path>
+            <destination>/</destination>
+            <source>/.*</source>
+        </path>
+    </paths>
+</configuration>
