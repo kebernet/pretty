@@ -198,23 +198,24 @@ If you have enabled the Groovy Command Shell, you can connect to it with telnet 
 
 Here you see a set of default commands. You can also, as seen above, call Configurator.load to re-load the configuration from disk. Other standard things you can do from the command shell:
 
-Configurator.startWatching() -- begin watching the configuration file for changes.
-Configurator.stopWatching() -- stop watching the configuration file for changes.
-Configurator.load() -- load the current configuration file from disk
-Configurator.save() -- save the current active configuration to disk
-Resolver.getInactivesInCache() -- returns the current number of sessions on old configurations waiting to phase out
-Resolver.stats() -- shows the status of the various caches in the resolution system
-Server.stop() -- stops the proxy server.
-Server.start() -- starts the proxy server.
-Agent.start() -- starts the remote config synchronization agent.
-(The services below this require this to be running to operate)
-Agent.stop() -- stops the remote synchronization agent.
-Heart.start() -- starts the heartbeat broadcasts.
-Heart.stop() -- stops heartbeat broadcasts.
-FailWatcher.start() -- starts the remote server failure watcher.
-FailWatcher.stop() -- stops the fail watcher
-RemoteSessionWatcher.start() -- starts the remote session replication.
-RemoteSessionWatcher.stop() -- stops remote session replication.
+ * Configurator.startWatching() -- begin watching the configuration file for changes.
+ * Configurator.stopWatching() -- stop watching the configuration file for changes.
+ * Configurator.load() -- load the current configuration file from disk
+ * Configurator.save() -- save the current active configuration to disk
+ * Resolver.getInactivesInCache() -- returns the current number of sessions on old configurations waiting to phase out
+ * Resolver.stats() -- shows the status of the various caches in the resolution system
+ * Server.stop() -- stops the proxy server.
+ * Server.start() -- starts the proxy server.
+ * Agent.start() -- starts the remote config synchronization agent.
+    (The services below this require this to be running to operate)
+ * Agent.stop() -- stops the remote synchronization agent.
+ * Heart.start() -- starts the heartbeat broadcasts.
+ * Heart.stop() -- stops heartbeat broadcasts.
+ * FailWatcher.start() -- starts the remote server failure watcher.
+ * FailWatcher.stop() -- stops the fail watcher
+ * RemoteSessionWatcher.start() -- starts the remote session replication.
+ * RemoteSessionWatcher.stop() -- stops remote session replication.
+
 Note, however, this is a full-featured Groovy shell. There is actually very little about the runtime state of the application that *can't* be done via this shell. The above list just shows some common tasks that you might want to perform.
 
 
