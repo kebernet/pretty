@@ -1,0 +1,3 @@
+#!/bin/bash
+. /etc/pretty/env.sh
+$JAVA_HOME/bin/java $JAVA_OPTS -cp /usr/local/pretty/pretty-runnable.jar com.reachcall.pretty.TLSSetup $@
