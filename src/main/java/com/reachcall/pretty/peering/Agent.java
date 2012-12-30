@@ -145,7 +145,7 @@ public class Agent implements AgentMBean {
         this.listeners.remove(listener);
     }
 
-    byte[] serializeConfiguration(Configuration config) throws JAXBException, IOException {
+        byte[] serializeConfiguration(Configuration config) throws JAXBException, IOException {
         byte[] data = this.configurationIO.marshall(config);
         byte[] packet = new byte[data.length + 1];
         packet[0] = MESSAGE_CONFIG_UPDATE;
